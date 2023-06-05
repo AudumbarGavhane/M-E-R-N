@@ -1,0 +1,754 @@
+
+# --->Make basic server output on browser
+---------------------------------
+make basic browser
+Function parameter in node 
+Arrow function 
+Get output on browser
+Interview question
+------------------------------------
+To create server
+----------------------------------------------------------------------------
+-->need to import core module http
+
+step 1.--> const http=require('http');
+
+step 2----> http.createServer((req,resp)=>{----logic---->resp.write("write  a msg!!")}).listen(----portNo----,()=>{---write a msg eg server is crested!!})
+
+createServer take function as parameter as per node docs.
+----------------------------------------------------------------------------
+
+Step 2-->http.createServer((req,resp)=>{
+
+resp.write("hello audi! how are you ? ")
+
+}).listen(4500,()=>{
+    console.log("Server is created at port no 4500")
+});
+----------------------------------------------------------------------------
+-->every time we make changes in the output we need to run the server again!
+-->in create server we pass the anonyms fuction, we can also create and pass   	function in it.
+
+--> we can write a function as
+	const <funcion_name> =(req,resp)=>{
+			resp.write("<div> Hello Audi I am Here !</div>")
+			}
+	--> and then pass it as arg in other function.
+
+	eg2 const test=(a)=>a*100;
+
+
+
+
+
+
+All About Package.json
+----------------------------------------------------------------------------
+What is package file?
+How to make it?
+Check the file in detail.
+Install external package
+Interview que
+
+
+
+-->It takes the details of our project
+  	eg packages, mogodb, versions, validations, code related details,git repo details,entry point, description
+
+
+
+{
+package-lock.json-->keep details of package
+package.json--->keep details of versions***
+
+}
+
+
+
+--> step 1: npn init  ->> node package manager
+--> step 2: package name: ___________
+--> step 3: is it ok? -->yes
+--> step 4: To manage pkg we need to install them
+		--> eg. npm install express.js
+
+
+
+ .gitignore
+	/<folder_names>
+	--> it ignore to push node_odules on github repo
+	-->node modules should not upload on github because the are very big 		in size
+
+-----Lect10-----------------------------------------------------------------
+	-->package and modules are the same things
+-->Nodemon | time  saving module
+-->What is the nodemon package?
+-->How to install it?
+-->How to use it?
+-->Interview quesion.
+
+
+-->we can save time using this module
+**When we changing code we need to run it everytime, to save this time we use nodemoon.
+
+--> npm i nodemon -g   ---> globally install nodemon need not to install for every new project
+
+
+**instead of node now use nodemon to run our server file, bcz of this whenever you are doing changes in code it will automatically detect and implement/run it
+
+
+
+-->Interview quesion.
+
+-->Nodejs is sync ro async language?
+	-->Ans is async lang
+	--nodejs is single threaded language
+	-->How async?
+1. run first script
+2. run second script(complex data)
+	---it will not wait to finish second script---
+3. Run third script
+4. continue...
+The same reason is why js is fast laguage.
+
+
+
+
+---<NodeJs-Lect-11-Simple-and-basic-API>-----------------------------------
+
+-->Make a server
+-->create header and API body
+-->Create an api with static data
+-->Put data in another file
+-->Interview Question
+
+resp.writeHead(200,{''}) --> 200 is get api status code which is standard one {''} content type {'Content-Type':'application/json'} 
+it may be ----text/plain----- text/html------
+
+
+
+
+
+------<nodeJS lect 12>Getting input from cmd>----------------------------
+
+
+
+const input =process.argv;
+
+input[0]=node,----> input[1]=app.js,----> input[2]= add/remove/append
+input[3]=filename,--->input[5]=content to add in the file
+
+-->To remove file
+fs.unlinkSync(input[3]);
+
+-->To add/create file
+fs.writeFileSync(input[3],input[4]);
+
+
+-->Add/append content to the file
+fs.appendFile(input[3],input[4]);
+
+
+
+---------<Lect 13-->Show file list>-----------------------------------------
+Make files in folder
+use path module
+get file names and print
+Interview Question
+
+Que-> how to make file in a folder
+	
+const fs=require('fs');
+fs.writeFileSync('apple.txt','Content to add in a file');
+
+
+-->To craete file in different folder we need to define its path
+const path=require('path')
+const reqPath=path.join(__dirname,'files-->its a folder in cuurent directory in which we want to make/create file');
+
+
+fs.writeFileSync(reqPath+"/hello"+i+".text","a simple file")
+
+/ __dirname gives current directory path
+
+
+
+To read files in directory use
+fs.readdir(dirPath,(err,dirname)=>{
+
+dirname.forEach((item)=>{
+	console.log(item);
+})
+
+})
+
+Interview Question
+Can we get files from any other dir than current dir
+	No. bcz cuurent programm we made is act as webserver so we cant access local drive data directory need to do special programming for it
+
+
+-----Lect 14-CRUD with File System>-----------------------------------------
+
+Make file
+Read file
+Update file
+Rename file
+Delete file
+Interview Question
+
+
+const fs=require('fs');
+const path=require('path')
+const dirPath=path.join(__dirname,'<foldername>')
+
+fs.writeFileSync('apple.txt','This is simple text file')-->making file in present working directory
+
+const filepath=`${dirPath}/apple.txt`;
+
+fs.writeFileSync(filepath,"An apple a day keeps doctor away")
+
+fs.readFile(filepath,utf8,(err,item)=>{
+
+console.log(item);
+
+})
+
+
+// To append content in the file
+fs.appendFile(filename,'adding/appending text to the file',(err)=>{
+
+	if(!err) console.log('file is updated-->content is appended in it')
+})
+
+
+
+
+//To rename filename
+fs.rename(filepath,`${dirPath}/apple.txt`,(err)=>{
+
+	if(!err) console.log('file is updated-->content is appended in it')
+})
+
+
+Buffer--> is a temp memory location req to node to perform operation
+
+
+
+--------<Lect 15-->Asynchronous basics in NodeJS>--------------------------
+
+ Lect 16 callback and promise
+-------------------------------
+let a=20
+let b=0;
+
+
+let waitingData=new Promise((resolve,reject)=>{
+setTimeout(()=>{
+ resolve(30)
+},2000)
+
+})
+
+waitingData.then((data)=>{
+b=data
+console.log(a+b);
+})
+
+
+---------lect 17 How NodeJS works---------------------------------------
+Call Stack
+Node API
+CallBack Queue
+Example
+Interview Question
+-------------------------------------
+This process is called as event Queue
+
+const x=1
+const y=x+2
+console.log('Sum is '+y)
+--Above code is wrtten in main---
+---------------------------------------
+call stack		Node API
+
+			setTimeout(2 sec)
+			setTimeout(0 sec)
+			This functions are also running at the same time
+
+log('sum is 3')
+main()
+
+EventLoop
+-->CallBack Queue
+setTimeout(0 sec)
+
+
+setTimeout(()=>{//This is cpp function
+ resolve(30)
+},2000)
+
+The functions inheriting from c cpp firstly registered on node APIs
+(Appliction Programming interface) 
+
+
+----Lect 18-ExpressJS------------------------------------------------------
+
+ExpressJS is framework in nodeJS
+What is expressJs
+Install Express
+Make Example with express js.
+Interview question.
+
+
+get method in express provide routes
+
+const express=require('express');
+const app=express();
+
+app.get('',(request,response)=>{
+resp.send('Hello guy wlcome to Express.js')
+});
+
+
+app.get('/about',(req,resp)={
+
+resp.send('Hello this is help page')
+
+});
+
+
+app.listen(2000,()=>{console.log('server is running at port 2000')});
+
+
+
+------<Lect 19 Routing Params-Request and Response>----------------------
+
+
+
+
+onst express=require('express');
+const app=express();
+
+app.get('',(request,response)=>{
+
+console.log("data send by browser====>  ",request.querry.name)
+
+
+resp.send('Hello guy wlcome to Express.js')
+});
+
+
+app.get('/about',(req,resp)={
+
+resp.send('Hello this is help page')
+
+});
+
+
+app.listen(2000,()=>{console.log('server is running at port 2000')});
+
+
+
+--------------lect 20 Render html and json---------------------------------
+
+render means to display
+How html tag show json data, link pages
+Interview Question
+
+
+app.get('/',(req,resp)=>{ // '/'-->means home page url
+
+// after ? there is a querry in the request
+// response is what we send to the user/browser
+
+    //request me browser se send kari gayi querry ayegi
+    //eg localhost:2000?name=Audumbar
+    console.log("browser send data==> ",req.query.name)
+resp.send(`<h1>Hello guy wlcome to Express.js
+ this is home page</h1><a href="/about">Goto about page</a>`)
+});
+
+
+app.get('/about',(req,resp)=>{
+
+resp.send(`<h1>Hello this is about page</h1>
+<input type="text" placeholder="user name" value="${req.query.name}"></input>
+<button type=button >submit</button>
+<a href="/">Goto Home Page</a>`)
+
+});
+
+
+
+---------Lect 21 Make HTML Pages---------------------------
+make folder for html files and access it
+Make html files
+load html files
+interview questions
+
+Que Use of path module
+	it is use to access folders of our project
+how? __dirname
+
+
+express.static(path to the page) --> is use to load static content of our website
+
+we cnt use css in static content directly for tht we need to write css first in other file and then implement it into the static html file
+
+
+why we cant use css directly into static html pages?
+Ans
+
+
+
+
+
+
+
+----------------Lect 22 Remove extensions from url--------------------
+Apply get method
+Remove an extension from url
+make 404 page
+Apply 404 page
+Interview Question
+
+http://localhost:2000/about.html-->.html is the extension here which we want to remove
+
+we will not use the method
+app.use(express.static(publicPath))-->to remove extensions of a files
+
+we will use app.get() method
+-----------------------------
+app.get('/about',(__,resp)=>{
+    resp.sendFile(`${publicPath}/about.html`)
+})
+
+
+----------lect 23 Template engine-------------------------------------------
+What is the tamplate engine?
+Install ejs template package.
+Setup dynamic routing
+Make dynamic page
+Interview Question
+
+Around 95% we make api in node jst than dynamic pages
+
+What is the tamplate engine?
+Use to make dynamic pages. for creating dyanapic pages need to install npm package 
+-->npm install ejs
+
+
+What is dynamic pages?
+
+Why ejs?
+
+--------------------------------
+app.set('view engine','ejs');
+ejs-->is a template engine
+need to make folder views-->by default
+extension of dynamic file will be ejs
+
+
+
+app.get('/profile',(__,resp)=>{
+resp.render('profile',{  })
+
+------> with resp.render file we can send 
+	ejs page as well as a object 
+});
+
+});
+
+in views folder we made a file named profile.ejs 
+set view engien and then render the the profile file
+
+<%=  %>--> tag is used to get dynamic data
+
+
+
+
+---------Lect 24 Dynamic Page----------------------------------------------
+How to make loop in ejs
+Make header files
+Show common header file
+Interview Question
+
+db connection
+middleware
+
+
+<h1>Welcome <%= user.name %></h1>       
+        <h3>Email: <%= user.name %></h3>
+        <h3>City: <%= user.city %></h3>
+
+
+
+--------Lect 25 MiddleWare------------------------------------------------
+
+
+what are miidewares
+how to make a middleware
+apply middleware on routes
+type of middlewares
+interview question
+
+
+
+-->Middleware can be used with routes only
+
+
+What are miidlewares?
+--> with the help of middlewares we can acess req or resp and modify them
+we can check user is login or not using middleware
+why middleware?
+Accessing req throgh routes is tedious job while
+we need to make middleware once and can use maultiple times
+
+we can make different file  of middleware bcz we can have multiple middlewares in a file
+
+
+const reqFilter=(req,resp,next)=>{
+    if(!req.query.age)
+    {
+    resp.send("Please provide age")
+    }
+    else if(req.query.age>18)
+    {
+        next();
+    }
+    else
+    {
+	resp.send('You can not access this website')
+    }
+    
+   }
+
+app.use(reqFilter);
+
+similarly we can craete logic for user is logged in or not
+Basic middleware is validating and filtering user
+
+
+-----Lect 26 Route level middleware---------------------------------------
+
+Route level middleware
+Apply middleware on single route
+make middleware in different file
+Apply middleware in the group of route
+Interview Question
+
+What is route level middleware?
+	we can use same middleware on different routes on or many or all routes 
+
+
+app.use(reqFilter);//on this line we applied middleware on all app
+
+
+// in this logic we applied miidleware on single route
+for specific request/route we can apply middle as
+app.get('/singleroute',reqFilter,(req,resp)=>{
+resp.send('Welcome to users page')
+})
+
+
+Apply middleware in group of route
+----------------------------------
+
+const  route=express.Router();
+
+
+***route.use(reqFilter)
+route.app.get('/contact',(req,resp)=>{
+    resp.send('welcome to home page !!')
+});
+
+
+route.app.get('/contact',(req,resp)=>{
+    resp.send('welcome to home page !!')
+});
+
+***app.use('/',route);
+
+-->app level middleware are applied globally while route level middleware are applied on single route/multiple route
+
+
+-------Lect 27 Install MongoDB----------------------------------------------
+
+ Download DB
+Install MongoDB
+Set Environment for Mongo
+Mongodb compass tool
+Interview Question
+
+----------------lect 27 MogoDB basic---------------------------------------
+What is MongoDB
+MongoDB vs MySQL
+MongoDB basic commands
+Interview Questions
+
+ 
+
+------lect 29 crud operations in mongoDB----------------------------------
+How to insert data collection
+How to check insert data
+How to update data
+how to delete data
+Interview question
+
+
+
+----lect 30 how to connect nodejs and mongoDB-----------------------------
+
+Install mongoDb pkg
+Connect mongodb with nodejs
+Show data from mongodb
+Interview questions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
