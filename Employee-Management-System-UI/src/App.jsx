@@ -1,17 +1,31 @@
 
 import React from "react";
-import EmployeePage from "./components/feature/EmployeePage";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import EmployeePage from "./components/EmployeePage/EmployeePage";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddEmployee from "./components/AddEmployee/AddEmployee";
 
 
 function App() {
 
 
   return (
-    <div>
-      <EmployeePage></EmployeePage>
-    </div>
-  )
+    <>
+           <Router>
+            <Header />
+            
+            <main className="container mt-4">
+                <Routes>
+                    <Route path="/employees" element={<EmployeePage />} />
+                    <Route path="/add-employee" element={<AddEmployee />} />
+                </Routes>
+            </main>
+            <Footer />
+        </Router>
+        </>
+  );
 }
 
 export default App
