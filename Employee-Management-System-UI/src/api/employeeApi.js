@@ -10,7 +10,7 @@ export const getEmployees = async ()=>{
         console.error('Error fetching employees: ',error);
         throw error;
     }
-}
+};
 
 export const addEmployee = async (employeeData) => {
     try {
@@ -21,3 +21,12 @@ export const addEmployee = async (employeeData) => {
         throw error;
     }
 };
+
+export const deleteEmployee= async(id) => {
+        return await axios.delete(`${BASE_URL}/delete/${id}`);
+}
+
+export const updateEmployee = async (id, employee) => {
+  return await axios.put(`${BASE_URL}/update/${id}`, employee);
+};
+
